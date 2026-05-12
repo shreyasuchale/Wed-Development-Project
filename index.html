@@ -1,278 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Parent Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Student Parent Portal</title>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-<style>
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+        .login-section {
+            padding: 60px 40px;
+            text-align: center;
+        }
 
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#5f72ff,#9b23ea);
-}
+        .login-section h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
 
-.container{
-    width:90%;
-    max-width:450px;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
+        .login-section p {
+            color: #666;
+            margin-bottom: 40px;
+        }
 
-h1{
-    text-align:center;
-    color:#5f72ff;
-    margin-bottom:10px;
-}
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
 
-.subtitle{
-    text-align:center;
-    color:#666;
-    margin-bottom:30px;
-}
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
 
-.input-group{
-    margin-bottom:20px;
-}
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
 
-label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:bold;
-    color:#333;
-}
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
 
-input{
-    width:100%;
-    padding:14px;
-    border:2px solid #ddd;
-    border-radius:10px;
-    font-size:16px;
-    transition:0.3s;
-}
+        .form-group input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
 
-input:focus{
-    border-color:#5f72ff;
-    outline:none;
-}
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-.password-box{
-    position:relative;
-}
+        .btn:hover {
+            background: #5a67d8;
+        }
 
-.password-box span{
-    position:absolute;
-    right:15px;
-    top:15px;
-    cursor:pointer;
-    font-size:14px;
-    color:#5f72ff;
-    font-weight:bold;
-}
+        .dashboard {
+            display: none;
+            padding: 40px;
+        }
 
-button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg,#5f72ff,#9b23ea);
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
+        .dashboard h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
 
-button:hover{
-    transform:scale(1.03);
-}
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
 
-.register{
-    text-align:center;
-    margin-top:20px;
-    color:#666;
-}
+        .card {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
 
-.register a{
-    color:#5f72ff;
-    text-decoration:none;
-    font-weight:bold;
-}
+        .card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
 
-.message{
-    margin-top:15px;
-    text-align:center;
-    font-weight:bold;
-}
+        .logout-btn {
+            margin-top: 30px;
+            background: crimson;
+        }
 
-.dashboard{
-    display:none;
-    text-align:center;
-}
-
-.dashboard h2{
-    color:#5f72ff;
-    margin-bottom:20px;
-}
-
-.card{
-    background:#f3f4ff;
-    padding:15px;
-    margin:10px 0;
-    border-radius:12px;
-    font-size:18px;
-}
-
-.logout{
-    margin-top:20px;
-    background:red;
-}
-
-</style>
+        @media (max-width: 600px) {
+            .login-section,
+            .dashboard {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
 
-    <!-- LOGIN FORM -->
-
-    <div id="loginPage">
-
+    <!-- Login Section -->
+    <div class="login-section" id="loginSection">
         <h1>Student Parent Portal</h1>
+        <p>Login to view student academic details</p>
 
-        <p class="subtitle">
-            Access your child's academic information
-        </p>
+        <div class="login-form">
+            <div class="form-group">
+                <label>Parent Name</label>
+                <input type="text" id="username" placeholder="Enter Name">
+            </div>
 
-        <div class="input-group">
-            <label>Parent Name</label>
-            <input type="text" id="name" placeholder="Enter your full name">
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter Password">
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" onclick="showPassword()"> Show Password
+            </div>
+
+            <button class="btn" onclick="login()">Login</button>
         </div>
+    </div>
 
-        <div class="input-group">
-            <label>Password</label>
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <h2>Welcome Parent</h2>
 
-            <div class="password-box">
-                <input type="password" id="password" placeholder="Enter password">
-                <span onclick="togglePassword()">Show</span>
+        <div class="card-container">
+            <div class="card">
+                <h3>Attendance</h3>
+                <p>92%</p>
+            </div>
+
+            <div class="card">
+                <h3>Marks</h3>
+                <p>85%</p>
+            </div>
+
+            <div class="card">
+                <h3>Fees Status</h3>
+                <p>Paid</p>
+            </div>
+
+            <div class="card">
+                <h3>Notices</h3>
+                <p>Exam starts from Monday</p>
             </div>
         </div>
 
-        <button onclick="login()">Login</button>
-
-        <div class="message" id="message"></div>
-
-        <div class="register">
-            Don't have an account?
-            <a href="#">Register here</a>
-        </div>
-
-    </div>
-
-
-
-    <!-- DASHBOARD -->
-
-    <div class="dashboard" id="dashboard">
-
-        <h2>Welcome Parent</h2>
-
-        <div class="card">
-            👨 Student Name : Rahul Sharma
-        </div>
-
-        <div class="card">
-            📚 Attendance : 92%
-        </div>
-
-        <div class="card">
-            📝 Marks : 85%
-        </div>
-
-        <div class="card">
-            💰 Fees Status : Paid
-        </div>
-
-        <div class="card">
-            📢 Notice : Parent Meeting on Friday
-        </div>
-
-        <button class="logout" onclick="logout()">
-            Logout
-        </button>
-
+        <button class="btn logout-btn" onclick="logout()">Logout</button>
     </div>
 
 </div>
 
 <script>
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
-function togglePassword(){
-
-    let pass = document.getElementById("password");
-
-    if(pass.type === "password"){
-        pass.type = "text";
+        if(username === 'parent' && password === '1234') {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        } else {
+            alert('Invalid Username or Password');
+        }
     }
-    else{
-        pass.type = "password";
+
+    function showPassword() {
+        const passwordField = document.getElementById('password');
+
+        if(passwordField.type === 'password') {
+            passwordField.type = 'text';
+        } else {
+            passwordField.type = 'password';
+        }
     }
-}
 
-function login(){
-
-    let name = document.getElementById("name").value;
-    let password = document.getElementById("password").value;
-    let message = document.getElementById("message");
-
-    if(name === "" || password === ""){
-
-        message.style.color = "red";
-        message.innerHTML = "Please fill all fields";
-
+    function logout() {
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('loginSection').style.display = 'block';
     }
-    else if(password === "1234"){
-
-        message.style.color = "green";
-        message.innerHTML = "Login Successful";
-
-        setTimeout(() => {
-
-            document.getElementById("loginPage").style.display = "none";
-            document.getElementById("dashboard").style.display = "block";
-
-        },1000);
-
-    }
-    else{
-
-        message.style.color = "red";
-        message.innerHTML = "Invalid Password";
-
-    }
-}
-
-function logout(){
-
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("loginPage").style.display = "block";
-
-}
-
 </script>
 
 </body>
